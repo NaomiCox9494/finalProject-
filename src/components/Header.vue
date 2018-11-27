@@ -44,7 +44,7 @@
     export default {
         data() {
           return {
-            isDropdownOpen = false;
+            isDropdownOpen = 'false'
               //ToDo: Create data object called isDropdownOpen and set it to false
           }
         },
