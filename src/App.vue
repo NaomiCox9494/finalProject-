@@ -1,10 +1,11 @@
 <template>
     <div class="container">
+        <app-header></app-header>
         <!--ToDo: Load app-header-->
         <div class="row">
             <div class="col-xs-12">
                 <transition name="slide" mode="out-in">
-                    <!--ToDo: Load router-view-->
+                    <router-view></router-view>
                 </transition>
             </div>
         </div>
@@ -12,10 +13,22 @@
 </template>
 
 <script>
-    //ToDo: Import Header Component
+
+    import Header from './components/Header.vue';
 
     export default {
-        //ToDo: Initialize Header component and name it appHeader
+      data(){
+        return{
+
+        }
+      },
+      components:{
+        appHeader: Header
+      },
+      created :function(){
+
+      }
+
 
         //ToDo: On page creation dispatch 'initStocks' to the vuex $store
     }
@@ -26,14 +39,34 @@
         padding: 30px;
     }
 
-    /*ToDo: Create slide-in effect for enter-active*/
-    /*ToDo: Create slide-in effect for leave-active*/
+    .slide-in-enter-active{
+        transition: opacity 300ms ease;
+        opacity: 0;
+        animation: slide-out 300ms ease-out forwards;
+    }
 
-    /*ToDo: Create Keyframes for slide-in, remember to include from and to*/
-        /*You can use any settings*/
+    .slide-in-leave-active{
+        opacity: 300ms;
+        transform: translateY(0);
+    }
 
-    /*ToDo: Create Keyframes for slide-out, remember to include from and to*/
-        /*You can use any settings*/
+    @keyframes slide-in{
+        to{
+            transform: translateX(0);
+        }
+        from{
+            transform: translateX(-30px);
+        }
+    }
+
+    @keyframes slide-out{
+        to{
+            transform: translateX(-30px);
+        }
+        from{
+            transform: translateX(0);
+        }
+    }
 
 </style>
 
