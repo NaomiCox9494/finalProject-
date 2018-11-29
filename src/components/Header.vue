@@ -23,13 +23,13 @@
 
                     <!--ToDo: Inside <li> Bind to class using :class that passes an object {} called open and set it to isDropdownOpen-->
                         <!--ToDo: Add click event that toggles isDropdownOpen to true and false-->
-                    <li class="dropdown">
+                    <li class="dropdown" v-bind:class= "{open: isDropdownOpen}" @click="isDropdownOpen = !isDropdownOpen">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <!--ToDo: Add click event that calls the saveData method-->
-                            <li><a href="#">Save Data</a></li>
+                            <li @click="saveData"><a href="#">Save Data</a></li>
                             <!--ToDo: Add click event that calls the loadData method-->
-                            <li><a href="#">Load Data</a></li>
+                            <li @click="loadData"><a href="#">Load Data</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
     //ToDo: Import mapActions from vuex
 
     export default {
@@ -56,15 +57,31 @@
             //ToDo: Have funds() return this.$store.getters.funds
         },
         methods: {
+          ...mapActions({
+            randomizeStocks : 'randomizeStocks',
+            fetchData: 'loadData'
+             }),
+
+
             //ToDo: Create ...mapActions method
                 //ToDo: Call randomizeStocks: 'randomizeStocks'
                 //ToDo: Call fetchData: 'loadData'
             endDay(){
               randomizeStocks()
-            }
+            },
             //ToDo: Create endDay method
                 //ToDo: Call randomizeStocks()
-
+            saveData(){
+                const data = {
+                  funds: $store.getters.funds,
+                  stockPortfolio: $store.getters.stockPortfolio,
+                  stocks: $store.getters.stocks
+                };
+                    this.$http.put('data.json', data)
+            },
+            loadData(){
+                fetchData()
+             }
             //ToDo: Create SaveData method
                 //ToDo: Create const called data that holds an object
                     //ToDo: Set funds: to the $store getters funds

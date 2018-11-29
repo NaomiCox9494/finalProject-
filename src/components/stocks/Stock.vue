@@ -3,6 +3,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">
+                    {{stock.name}}<small> Price: {{stock.price}}</small>
                     <!--ToDo: Display the stock.name data object-->
                     <!--ToDo: Inside <small> tags display Price: stock.price-->
                 </h3>
@@ -10,8 +11,10 @@
             <div class="panel-body">
                 <div class="pull-left">
                     <!--ToDo: Inside input use v-model.number and pass quantity-->
-                        <!--ToDo: Bind to class using : and pass object called danger that takes in insufficientQuantity-->
+                        <!--ToDo: Bind to class using : and pass object called danger that takes in insufficientFunds-->
                     <input
+                            v-model.number = "{quantity}"
+                            :class={danger:insufficientFunds}
                             type="number"
                             class="form-control"
                             placeholder="Quantity">
@@ -19,8 +22,8 @@
                 <div class="pull-right">
                     <!--ToDo: Inside the button add a click event that calls buyStock-->
                     <!--ToDo: Bind to disabled using : and set it equal to insufficientQuantity || quantity is less than or equal to 0 || !Number.isInteger(quantity)-->
-                    <button class="btn btn-success">
-                        <!--ToDo: Display insufficientQuantity data object and add if using ? 'Not Enough' else 'Buy'-->
+                    <button class="btn btn-success" @click="buyStock" :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)">
+                       {{insufficientFunds}}  <!--ToDo: Display insufficientQuantity data object and add if using ? 'Not Enough' else 'Buy'-->
                     </button>
                 </div>
             </div>
@@ -36,14 +39,22 @@
 
 <script>
     export default {
+      props: ['stock'],
         //ToDo: Set props equal to stock using array syntax
 
         data() {
             return {
+              quantity: 0
                 //ToDo: Create data object called quantity and set it to 0
             }
         },
         computed: {
+            funds(){
+              return this.$store.getters.funds
+            },
+            insufficientFunds(){
+              return this.quantity * this.stock.price > this.funds
+            }
             //ToDo: Create a computed function called funds
                 //ToDo: Have funds() return $store.getters.funds
 
@@ -51,6 +62,15 @@
                 //ToDo: Have insufficientFunds() return this.quantity * this.stock.price > this.funds
         },
         methods: {
+            buyStocks(){
+              const order = {
+                stockId : this.stock.id,
+                stockPrice : this.stock.price,
+                quantity : this.quantity
+              };
+              this.quantity = 0;
+              this.$store.dispatch('buyStock', order);
+            }
             //ToDo: Create buyStock method
                 //ToDo: Create const called order that holds an object
                     //ToDo: Set stockId: to stock.id
