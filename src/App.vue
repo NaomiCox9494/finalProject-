@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <app-header></app-header>
-        <!--ToDo: Load app-header-->
         <div class="row">
             <div class="col-xs-12">
                 <transition name="slide" mode="out-in">
@@ -13,25 +12,17 @@
 </template>
 
 <script>
+  import Header from './components/Header.vue';
 
-    import Header from './components/Header.vue';
+  export default {
+    components: {
+      appHeader: Header
+    },
 
-    export default {
-      data(){
-        return{
-
-        }
-      },
-      components:{
-        appHeader: Header
-      },
-      created :function(){
-
-      }
-
-
-        //ToDo: On page creation dispatch 'initStocks' to the vuex $store
+    created() {
+      this.$store('initStocks');
     }
+  }
 </script>
 
 <style>
@@ -39,34 +30,35 @@
         padding: 30px;
     }
 
-    .slide-in-enter-active{
-        transition: opacity 300ms ease;
+    .slide-enter-active {
+        animation: slide-in 1s ease-out forwards;
+        transition: opacity .5s;
+    }
+
+    .slide-leave-active {
+        animation: slide-out 1s ease-out forwards;
+        transition: opacity 1s;
         opacity: 0;
-        animation: slide-out 300ms ease-out forwards;
     }
 
-    .slide-in-leave-active{
-        opacity: 300ms;
-        transform: translateY(0);
-    }
-
-    @keyframes slide-in{
-        to{
-            transform: translateX(0);
+    @keyframes slide-in {
+        from {
+            transform: translateY(20px);
         }
-        from{
-            transform: translateX(-30px);
+
+        to {
+            transform: translateY(0);
         }
     }
 
-    @keyframes slide-out{
-        to{
-            transform: translateX(-30px);
+    @keyframes slide-out {
+        from {
+            transform: translateY(0);
         }
-        from{
-            transform: translateX(0);
+
+        to {
+            transform: translateY(20px);
         }
     }
 
 </style>
-

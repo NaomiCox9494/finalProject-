@@ -18,8 +18,6 @@
             ...mapGetters({
               stocks: 'stockPortfolio'
             })
-            //ToDo: Create ...mapGetters method
-                //ToDo: Call stocks: 'stockPortfolio'
         },
         components:{
           appStock : Stock
