@@ -1,10 +1,22 @@
 //ToDo: Import vue and name it Vue
+import Vue from 'vue';
 
 export const loadData = ({commit}) => {
     Vue.http.get('data.json')
         .then(response => response.json())
         .then(data => {
             if (data) {
+                const stocks  = data.stocks;
+                const funds = data.funds;
+                  const stockPortfolio = data.stockPortfolio;
+
+                  const portfolio = {
+                    stockPortfolio,
+                    funds
+                  };
+
+                  commit('SET_STOCKS', stocks);
+                  commit('SET_PORTFOLIO', portfolio);
                 // ToDo: Create const call stocks that is equal to data.stocks
                 // ToDo: Create const call funds that is equal to data.funds
                 // ToDo: Create const call stockPortfolio that is equal to data.stockPortfolio
