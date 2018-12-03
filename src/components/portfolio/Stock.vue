@@ -23,7 +23,7 @@
                 <div class="pull-right">
                     <!--ToDo: Inside the button add a click event that calls sellStock-->
                         <!--ToDo: Bind to disabled using : and set it equal to insufficientQuantity || quantity is less than or equal to 0 || !Number.isInteger(quantity)-->
-                    <button class="btn btn-success" @click="buyStock" :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)">
+                    <button class="btn btn-success" @click="sellStock" :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)">
                         {{insufficientQuantity ? 'Not Enough' : 'Sell'}}
                         <!--ToDo: Display insufficientQuantity data object and add if using ? 'Not Enough' else 'Sell'-->
                     </button>
