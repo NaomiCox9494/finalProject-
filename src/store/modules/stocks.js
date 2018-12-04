@@ -5,12 +5,13 @@ const state = {
 };
 
 const mutations= {
-    SET_STOCKS(state, stocks){
+    'SET_STOCKS'(state, stocks){
   state.stocks = stocks;
    },
-    RND_STOCKS(state){
-  state.stocks.forEach(state);
-  stock.price = Math.round(stock.price) * (1 + Math.random() - 0.5)
+    'RND_STOCKS'(state){
+  state.stocks.forEach(stock => {
+    stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+  })
     }
 };
 //ToDo: Create const called state that is a data object{}
@@ -32,7 +33,7 @@ const actions = {
         commit('BUY_STOCK', order);
     },
 
-    ininStocks: ({commit}, stocks) => {
+    initStocks: ({commit}) => {
         commit('SET_STOCKS', stocks);
     },
 
@@ -48,7 +49,7 @@ const actions = {
 };
 
 const getters = {
-    stocks: ({commit}, state) => {
+    stocks: state => {
         return state.stocks
     }
 };
@@ -57,6 +58,9 @@ const getters = {
         //ToDo: Return state.stocks
 
 export default {
+   // components:{
+   //   appStocks: stocks
+   // },
     state,
     mutations,
     actions,

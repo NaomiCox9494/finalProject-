@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-stock :v-for="stock in stocks"></app-stock>
+        <app-stock v-for="stock in stocks" :stock="stock" :key="stock"></app-stock>
         <!--ToDo: Load app-stock component-->
             <!--ToDo: Loop through stock in stocks using v-for-->
             <!--ToDo: Bind to stock using : and pass stock from the v-for-->
@@ -19,7 +19,7 @@
 
         computed: {
             stocks(){
-              return $store.getters.stocks;
+              return this.$store.getters.stocks;
             }
             //ToDo: Create stocks computer method
                 // ToDo: Return $store.getters.stocks

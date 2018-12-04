@@ -3,13 +3,13 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    {{stock.name}}<small>(Price: {{stock.price}})</small>
+                    <small> {{stock.name}} </small> Price: {{stock.price}}
                 </h3>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
                     <input
-                            v-model.number="{quantity}"
+                            v-model.number="quantity"
                             :class="{danger:insufficientFunds}"
                             type="number"
                             class="form-control"
@@ -17,7 +17,7 @@
                 </div>
                 <div class="pull-right">
                     <button @click="buyStock" class="btn btn-success" :disabled ="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)">
-                        {{insufficientFunds ? 'Not Enough' : 'Sell'}}
+                        {{insufficientFunds ? 'Not Enough' : 'Buy'}}
                     </button>
                 </div>
             </div>
@@ -33,7 +33,7 @@
 
 <script>
   export default {
-    props: ['stock'],
+    props: ["stock"],
 
     data() {
       return {
@@ -42,11 +42,11 @@
     },
     computed: {
       funds() {
-        return this.$store.getters.funds();
+        return this.$store.getters.funds
       },
 
       insufficientFunds(){
-        return this.quantity * this.stock.price > this.funds;
+        return this.quantity * this.stock.price > this.funds
       }
     },
     methods: {
@@ -56,8 +56,8 @@
           stockPrice: this.stock.price,
           quantity: this.quantity,
         };
+        this.$store.dispatch('buyStock', order);
         this.quantity = 0;
-        return this.$store.dispatch('buyStock', order);
       }
     }
   }

@@ -20,7 +20,7 @@
     },
 
     created() {
-      this.$store('initStocks');
+      this.$store.dispatch('initStocks');
     }
   }
 </script>

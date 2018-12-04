@@ -6,9 +6,9 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <router-link to="/portfolio" active-class="active" tag="li" exact> Portfolio </router-link>
+                    <router-link to="/portfolio" active-class="active" tag="li" exact><a>Portfolio</a> </router-link>
 
-                    <router-link to="/stocks" active-class="active" tag="li"> Stocks </router-link>
+                    <router-link to="/stocks" active-class="active" tag="li"><a>Stocks</a></router-link>
 
                 </ul>
                 <strong class="navbar-text navbar-right">Funds:
@@ -45,7 +45,7 @@
     export default {
         data() {
           return {
-            isDropdownOpen = 'false'
+            isDropdownOpen : false
               //ToDo: Create data object called isDropdownOpen and set it to false
           }
         },
@@ -62,35 +62,21 @@
             fetchData: 'loadData'
              }),
 
-
-            //ToDo: Create ...mapActions method
-                //ToDo: Call randomizeStocks: 'randomizeStocks'
-                //ToDo: Call fetchData: 'loadData'
             endDay(){
-              randomizeStocks()
+              this.randomizeStocks()
             },
-            //ToDo: Create endDay method
-                //ToDo: Call randomizeStocks()
             saveData(){
                 const data = {
-                  funds: $store.getters.funds,
-                  stockPortfolio: $store.getters.stockPortfolio,
-                  stocks: $store.getters.stocks
+                  funds: this.$store.getters.funds,
+                  stockPortfolio: this.$store.getters.stockPortfolio,
+                  stocks: this.$store.getters.stocks
                 };
                     this.$http.put('data.json', data)
             },
             loadData(){
-                fetchData()
+                this.fetchData()
              }
-            //ToDo: Create SaveData method
-                //ToDo: Create const called data that holds an object
-                    //ToDo: Set funds: to the $store getters funds
-                    //ToDo: Set stockPortfolio: to the $store getters stockPortfolio
-                    //ToDo: Set stocks: to the $store getters stocks
-                //ToDo: Outside the data object use $http, using .put pass 'data.json' and the data object
 
-            //ToDo: Create loadData method
-                //ToDo: Call fetchData()
         }
     }
 </script>

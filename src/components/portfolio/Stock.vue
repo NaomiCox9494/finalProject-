@@ -49,7 +49,7 @@
 
         data() {
             return {
-              quantity: 0;
+              quantity: 0
                 //ToDo: Create data object called quantity and set it to 0
             }
         },
@@ -71,8 +71,9 @@
                   stockPrice: this.stock.price,
                   quantity: this.quantity
                 };
+                this.$store.dispatch('sellStock', order);
+              // this.placeSellOrder();
               this.quantity = 0;
-              return this.$store.dispatch('buyStock', order);
             }
 
             //ToDo: Create ...mapActions method
