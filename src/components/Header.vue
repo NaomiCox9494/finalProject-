@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import { mapActions } from 'vuex';
     //ToDo: Import mapActions from vuex
 
     export default {
